@@ -13,9 +13,14 @@ timestep=0
 
 for i in {1..50}
 do
+    # if i = 35 then
+        # robot -d results -i Team1 ./tst
+    # else
+        robot -d results ./tst
+    # fi
+    testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $HOST --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $USER --pw $PW --database $DB $RESULTDIR/output.xml
+
     buildnr=$((buildnr + 1)) 
     timestep=$((timestep + 120))
-    robot -d results ./tst
-    testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $HOST --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $USER --pw $PW --database $DB $RESULTDIR/output.xml
-    sleep 1s
+
 done
