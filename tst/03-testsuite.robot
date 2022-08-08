@@ -1,7 +1,7 @@
 *** Settings ***
 Library  String
 
-Force Tags  UC01  Team1
+Force Tags  UC03  Team2
 
 #Suite Setup  Fail  msg=Oops something went wrong
 
@@ -13,7 +13,7 @@ Force Tags  UC01  Team1
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
-        IF  ${int}>80
+        IF  ${int}>95
         Fail  msg=Oops nu gaat hij ineens fout
     END
 
@@ -21,10 +21,4 @@ Force Tags  UC01  Team1
     Log    Test is supposed to Pass
 
 04 Test
-    Log    Test is supposed to Pass
-
-05 Test
-    Log    Test is supposed to Pass
-
-06 Test
     Log    Test is supposed to Pass
