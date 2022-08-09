@@ -13,7 +13,7 @@ Force Tags  UC04  Team2
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
-        IF  ${int}>60
+        IF  ${int}>75
         Fail  msg=Oops nu gaat hij ineens fout met error ${int}
     END
 
@@ -21,7 +21,7 @@ Force Tags  UC04  Team2
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
-        IF  ${int}>60
+        IF  ${int}>80
         Fail  msg=Oops nu gaat hij ineens fout met error ${int}
     END
 
