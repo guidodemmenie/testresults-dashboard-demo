@@ -1,5 +1,0 @@
-#!/bin/bash
-user="<usr>"
-pw="<pw>"
-host="x.x.x.x"
-database="test-archive"
