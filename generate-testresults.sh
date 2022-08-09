@@ -21,6 +21,6 @@ do
     testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $HOST --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $USER --pw $PW --database $DB $RESULTDIR/output.xml
 
     buildnr=$((buildnr + 1)) 
-    timestep=$((timestep - 120))
+    timestep=$((timestep - 86400))
 
 done
