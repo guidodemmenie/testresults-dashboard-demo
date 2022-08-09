@@ -1,12 +1,7 @@
 #!/bin/bash
+source config.sh
 
-USER="<usr>"
-PW="<pw>"
-HOST="x.x.x.x"
-DB="test-archive"
-
-RESULTDIR=`pwd`"/results"
-echo  $RESULTDIR
+resultdir=`pwd`"/results"
 
 buildnr=20280014
 timestep=0
@@ -18,7 +13,7 @@ do
     # else
         robot -d results ./tst
     # fi
-    testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $HOST --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $USER --pw $PW --database $DB $RESULTDIR/output.xml
+    testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $HOST --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $user --pw $pw --database $database $resultdir/output.xml
 
     buildnr=$((buildnr + 1)) 
     timestep=$((timestep - 86400))
