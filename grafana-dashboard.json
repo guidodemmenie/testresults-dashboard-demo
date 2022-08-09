@@ -221,13 +221,26 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "testsuite"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 130
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 1
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 10
       },
       "id": 6,
       "options": {
@@ -238,7 +251,8 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": []
       },
       "pluginVersion": "9.1.0-beta1",
       "targets": [
@@ -251,7 +265,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT tc.name as TestCase, lm.message as LogMessage\nFROM test_series_mapping tsm\nJOIN test_run tr ON tsm.test_run_id = tr.id\nJOIN test_result tres ON tr.id = tres.test_run_id\nJOIN test_case tc ON tres.test_id = tc.id \nJOIN log_message lm ON tres.test_id = lm.test_id AND tsm.test_run_id = lm.test_run_id\nWHERE \n               tres.status = 'FAIL' and \n               tsm.build_id = '${buildnr}' and\n               lm.log_level = 'FAIL'\n",
+          "rawSql": "SELECT s.name as TestSuite, tc.name as TestCase, lm.message as LogMessage\nFROM test_series_mapping tsm\nJOIN test_run tr ON tsm.test_run_id = tr.id\nJOIN test_result tres ON tr.id = tres.test_run_id\nJOIN test_case tc ON tres.test_id = tc.id \nJOIN suite s ON tc.suite_id = s.id\nJOIN log_message lm ON tres.test_id = lm.test_id AND tsm.test_run_id = lm.test_run_id\nWHERE \n               tres.status = 'FAIL' and \n               tsm.build_id = '${buildnr}' and\n               lm.log_level = 'FAIL'\n",
           "refId": "A",
           "select": [
             [
@@ -282,7 +296,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 16
       },
       "id": 8,
       "panels": [],
@@ -383,7 +397,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 17
       },
       "id": 12,
       "options": {
@@ -505,6 +519,6 @@
   "timezone": "",
   "title": "TestDashboard",
   "uid": "ERaIoii4z",
-  "version": 11,
+  "version": 13,
   "weekStart": ""
 }
