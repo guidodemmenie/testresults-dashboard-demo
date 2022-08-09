@@ -13,7 +13,17 @@ do
     # else
         robot -d results ./tst
     # fi
-    testarchiver --time-adjust-secs $timestep  --dbengine postgresql --host $host --port 5432 --team AutRegTeam --series Regressie#$buildnr.001 --dont-require-ssl --user $user --pw $pw --database $database $resultdir/output.xml
+    testarchiver --time-adjust-secs $timestep  \
+                 --dbengine postgresql \
+                 --host $host \
+                 --port 5432 \
+                 --team AutRegTeam \
+                 --series Regressie#$buildnr.001 \
+                 --dont-require-ssl \
+                 --user $user \
+                 --pw $pw \
+                 --database $database \
+                 $resultdir/output.xml
 
     buildnr=$((buildnr + 1)) 
     timestep=$((timestep - 86400))
