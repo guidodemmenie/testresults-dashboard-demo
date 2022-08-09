@@ -14,7 +14,7 @@ Force Tags  UC02  Team1
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
         IF  ${int}>90
-        Fail  msg=Oops nu gaat hij ineens fout
+        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
     END
 
 03 Test
@@ -30,7 +30,16 @@ Force Tags  UC02  Team1
     Log    Test is supposed to Pass
 
 07 Test
-    Log    Test is supposed to Pass
-
+    ${value}    Generate Random String   length=2  chars=[NUMBERS]
+    ${int}  Convert to Integer  ${value}
+    Log to console  Value = ${int}
+        IF  ${int}>80
+        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+    END
 08 Test
-    Log    Test is supposed to Pass
+    ${value}    Generate Random String   length=2  chars=[NUMBERS]
+    ${int}  Convert to Integer  ${value}
+    Log to console  Value = ${int}
+        IF  ${int}>65
+        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+    END

@@ -13,8 +13,8 @@ Force Tags  UC03  Team2
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
-        IF  ${int}>95
-        Fail  msg=Oops nu gaat hij ineens fout
+        IF  ${int}>50
+        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
     END
 
 03 Test
