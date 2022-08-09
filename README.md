@@ -54,7 +54,7 @@ WHERE
    lm.log_level = 'FAIL'
 ```
 
-### Trend #testcases run per build*
+### Trend #testcases run per build
 ```sql
 SELECT
   $__timeGroupAlias(generated,$__interval),
@@ -64,6 +64,21 @@ FROM test_run tr
     JOIN test_case tc ON tres.test_id = tc.id
 WHERE
   $__timeFilter(generated)
+GROUP BY 1
+ORDER BY 1
+```
+
+### Trend Pass/Fail over time
+```sql
+SELECT
+  $__timeGroupAlias(generated,$__interval),
+  count(tres.status) AS "PASS"
+FROM test_run tr
+    JOIN test_result tres ON tr.id = tres.test_run_id 
+    JOIN test_case tc ON tres.test_id = tc.id
+WHERE
+  $__timeFilter(generated) AND
+  tres.status = 'PASS'  
 GROUP BY 1
 ORDER BY 1
 ```
