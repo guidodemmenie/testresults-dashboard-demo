@@ -201,6 +201,114 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.1.0-beta1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "8QOZ2mi4k"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT SUM(sr.elapsed), tr.generated as \"time\"\nFROM test_series_mapping tsm\n    JOIN test_run tr ON tsm.test_run_id = tr.id\n    JOIN suite_result sr ON tr.id = sr.test_run_id\nGROUP BY tr.generated",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "suite_id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "test_series",
+          "timeColumn": "elapsed",
+          "timeColumnType": "int4",
+          "where": []
+        }
+      ],
+      "title": "Doorlooptijd",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "8QOZ2mi4k"
+      },
+      "fieldConfig": {
+        "defaults": {
           "custom": {
             "align": "auto",
             "displayMode": "auto",
@@ -519,6 +627,6 @@
   "timezone": "",
   "title": "TestDashboard",
   "uid": "ERaIoii4z",
-  "version": 13,
+  "version": 14,
   "weekStart": ""
 }
