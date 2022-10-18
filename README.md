@@ -22,7 +22,7 @@ Using Podman/Docker and Minikube
 
 ### Podman
 
-```
+``` bash
 brew install podman
 podman machine init --cpu 2
 ```
@@ -35,9 +35,9 @@ minikube start --driver=podman --container-runtime=containerd --insecure-registr
 minikube addons enable registry
 ```
 
-> `--insecure-registry "10.0.0.0/24"` to enable pulling images from minikube registry
+`--insecure-registry "10.0.0.0/24"` to enable pulling images from minikube registry
 
-> `--cni=auto` to enable networking to work
+`--cni=auto` to enable networking to work
 
 ### Containers
 
@@ -53,13 +53,14 @@ minikube addons enable registry
 
 To build the image for robotframework run
 
-```
+``` bash
 minikube image build -t localhost:5000/robotframework:latest .
 minikube image push localhost:5000/robotframework:latest
 ```
 
 Apply all manifests
-```
+
+``` bash
 kubectl apply -f namespace.yaml
 kubectl apply -f postgres-secret.yaml
 kubectl apply -f postgres-db-config.yaml
@@ -72,7 +73,7 @@ Attach to the robotframework pod and run the script `generate-testresults.sh` an
 
 Opening the services to access reports and grafana (in separate shells):
 
-```
+``` bash
 minikube service rf-dashboard -n rf-dashboard-demo --url
 minikube service rf-robotframework -n rf-dashboard-demo --url
 ```
