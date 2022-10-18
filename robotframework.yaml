@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: robotframework
+  namespace: rf-dashboard-demo
+  labels:
+    app: robotframework
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: robotframework
+  template:
+    metadata:
+      labels:
+        app: robotframework
+    spec:
+      containers:
+      - name: robotframework
+        image: localhost:5000/robotframework:latest
+        imagePullPolicy: IfNotPresent
+        command: [ "/bin/sh", "-c", "--" ]
+        args: [ "while true; do sleep 30; done ;" ]
+        volumeMounts:
+        - mountPath: /rf/results
+          name: robotframework
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+      - name: robotframework-results
+        image: nginxinc/nginx-unprivileged
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: robotframework
+      volumes:
+      - name: robotframework
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: robotframework
+  namespace: rf-dashboard-demo
+spec:
+  type: NodePort
+  selector:
+    app: robotframework
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 31380

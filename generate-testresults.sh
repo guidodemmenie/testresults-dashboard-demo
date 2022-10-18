@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-host=172.17.0.3
-user=testers
-pw=
-database=test-archive
+host=rf-database
+user=postgres
+pw=$POSTGRES_PASSWORD
+database=postgres
 
 resultdir=`pwd`"/results"
 
@@ -14,12 +14,13 @@ echo host: $host
 echo user: $user
 echo database: $database
 
-for i in {1..30}
+i=0
+while [ $i -lt 30 ]
 do
     if [ $i = 8 ]; then
-       robot -d results -i Team1 ./tst
+       robot -d results/$buildnr -i Team1 ./tst
     else
-       robot -d results ./tst
+       robot -d results/$buildnr ./tst
     fi
     testarchiver --time-adjust-secs $timestep  \
           --dbengine postgresql \
@@ -31,9 +32,10 @@ do
           --user $user \
           --pw $pw \
           --database $database \
-          $resultdir/output.xml
+          $resultdir/$buildnr/output.xml
 
-    buildnr=$((buildnr + 1)) 
+    buildnr=$((buildnr + 1))
     timestep=$((timestep - 86400))
-
+    i=$((i + 1))
+    echo i: $i
 done

@@ -44,7 +44,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "8QOZ2mi4k"
+        "uid": "HvQub8S4k"
       },
       "description": "",
       "fieldConfig": {
@@ -130,7 +130,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "table",
           "group": [],
@@ -162,7 +162,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "table",
           "group": [],
@@ -197,7 +197,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "8QOZ2mi4k"
+        "uid": "HvQub8S4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -275,7 +275,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "time_series",
           "group": [],
@@ -305,7 +305,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "8QOZ2mi4k"
+        "uid": "HvQub8S4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -367,7 +367,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "table",
           "group": [],
@@ -414,7 +414,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "8QOZ2mi4k"
+        "uid": "HvQub8S4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -524,7 +524,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "time_series",
           "group": [],
@@ -554,7 +554,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "8QOZ2mi4k"
+            "uid": "HvQub8S4k"
           },
           "format": "time_series",
           "group": [],
@@ -601,7 +601,7 @@
         },
         "datasource": {
           "type": "postgres",
-          "uid": "8QOZ2mi4k"
+          "uid": "HvQub8S4k"
         },
         "definition": "select distinct build_id from test_series_mapping tsm ",
         "hide": 0,

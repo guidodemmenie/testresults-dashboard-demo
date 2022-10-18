@@ -1,0 +1,54 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rf-database
+  namespace: rf-dashboard-demo
+  labels:
+    app: rf-database
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rf-database
+  template:
+    metadata:
+      labels:
+        app: rf-database
+    spec:
+      containers:
+      - name: rf-database
+        image: postgres:alpine
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: initscript
+          mountPath: "/docker-entrypoint-initdb.d/testarchiver-initscript.sql"
+          subPath: testarchiver-initscript.sql
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+      volumes:
+      - name: initscript
+        configMap:
+          name: postgress-db-cfm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rf-database
+  namespace: rf-dashboard-demo
+spec:
+  type: NodePort
+  selector:
+    app: rf-database
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+    nodePort: 30543
