@@ -24,8 +24,21 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
-  "links": [],
+  "id": 3,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Robot Framework Report",
+      "tooltip": "Open Robot Framework Report",
+      "type": "link",
+      "url": "http://127.0.0.1:61530/${buildnr}/report.html"
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -44,7 +57,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "HvQub8S4k"
+        "uid": "DKfzXr5Vk"
       },
       "description": "",
       "fieldConfig": {
@@ -130,7 +143,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "table",
           "group": [],
@@ -162,7 +175,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "table",
           "group": [],
@@ -197,7 +210,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "HvQub8S4k"
+        "uid": "DKfzXr5Vk"
       },
       "fieldConfig": {
         "defaults": {
@@ -275,7 +288,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "time_series",
           "group": [],
@@ -305,7 +318,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "HvQub8S4k"
+        "uid": "DKfzXr5Vk"
       },
       "fieldConfig": {
         "defaults": {
@@ -362,12 +375,12 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.1.0-beta1",
+      "pluginVersion": "9.3.1",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "table",
           "group": [],
@@ -414,7 +427,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "HvQub8S4k"
+        "uid": "DKfzXr5Vk"
       },
       "fieldConfig": {
         "defaults": {
@@ -524,7 +537,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "time_series",
           "group": [],
@@ -554,7 +567,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "HvQub8S4k"
+            "uid": "DKfzXr5Vk"
           },
           "format": "time_series",
           "group": [],
@@ -596,12 +609,12 @@
       {
         "current": {
           "selected": false,
-          "text": "20280029.001",
-          "value": "20280029.001"
+          "text": "",
+          "value": ""
         },
         "datasource": {
           "type": "postgres",
-          "uid": "HvQub8S4k"
+          "uid": "DKfzXr5Vk"
         },
         "definition": "select distinct build_id from test_series_mapping tsm ",
         "hide": 0,
@@ -627,6 +640,6 @@
   "timezone": "",
   "title": "TestDashboard",
   "uid": "ERaIoii4z",
-  "version": 14,
+  "version": 3,
   "weekStart": ""
 }

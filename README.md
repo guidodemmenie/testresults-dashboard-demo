@@ -2,36 +2,45 @@
 
 ## Goal
 
-Generate testresults to be put on a dashboard.
+Generate testresults and represent the results on a dashboard.
 
-* TestSuite with passed testcases
-* TestSuite with passed and flakey testcases
+* Passing testcases
+* Flakey testcases
 * TestSuite with testcases that aren't run once in a while
-* One run completely fails
+* Execution time that increases over time
+
+## Setup
+
+Instruction are for running this on a Mac using [Minikube](https://minikube.sigs.k8s.io/docs/)
 
 ## Requirements
 
+* [Homebrew](https://brew.sh) (already installed)
+* [Podman](https://podman.io)
+* [Minikube](https://minikube.sigs.k8s.io/docs/)
 * [Robotframework](https://robotframework.org/)
 * [TestArchiver](https://github.com/salabs/TestArchiver)
 * [PostgreSQL](https://www.postgresql.org)
 * [Grafana](https://grafana.com/)
 
-## Setup
-
-Using Podman/Docker and Minikube
-
 ### Podman
 
 ``` bash
 brew install podman
-podman machine init --cpu 2
+podman machine init --cpus 2
 ```
 
 ### Minikube
 
 ``` bash
 brew install minikube
-minikube start --driver=podman --container-runtime=containerd --insecure-registry "10.0.0.0/24" --cni=auto
+
+minikube start \
+--driver=podman \
+--container-runtime=containerd \
+--insecure-registry "10.0.0.0/24" \
+--cni=auto
+
 minikube addons enable registry
 ```
 
@@ -50,6 +59,9 @@ minikube addons enable registry
 * Robotframework and TestArchiver
   * [robotframework.yaml](/robotframework.yaml)
   * [Dockerfile](/Dockerfile)
+  * For more info:
+    * [robotframework.org](https://robotframework.org)
+    * [TestArchiver @ github](https://github.com/salabs/TestArchiver)
 
 To build the image for robotframework run
 
@@ -61,6 +73,12 @@ minikube image push localhost:5000/robotframework:latest
 Apply all manifests
 
 ``` bash
+sh deploy.sh
+```
+
+or
+
+``` bash
 kubectl apply -f namespace.yaml
 kubectl apply -f postgres-secret.yaml
 kubectl apply -f postgres-db-config.yaml
@@ -69,23 +87,41 @@ kubectl apply -f grafana.yaml
 kubectl apply -f robotframework.yaml
 ```
 
-Attach to the robotframework pod and run the script `generate-testresults.sh` and go to report.
-
 Opening the services to access reports and grafana (in separate shells):
 
 ``` bash
-minikube service rf-dashboard -n rf-dashboard-demo --url
-minikube service rf-robotframework -n rf-dashboard-demo --url
+minikube service rf-database -n rf-dashboard-demo --url
+minikube service robotframework -n rf-dashboard-demo --url
+minikube service rf-dashboard -n rf-dashboard-demo
 ```
+
+Attach to the robotframework pod and run the script `generate-testresults.sh` and go to report. (services must be opened as described above, or dns lookups will fail)
 
 To open the reports:
 `http://localhost:<portnr>/<buildnr>/report.html`
 To open first build:
-`http://localhost:<portnr>/20280014/report.html`
+`http://localhost:<portnr>/20280209/report.html`
 
 ## Grafana
 
 The [grafana-dashboard.json](/grafana-dashboard.json) can be imported, the queries used are explaned here.
+
+Steps to get it all up and running:
+
+1. Create a Datasource (Postgres) with the url to the rf-database service
+    1. use the command `echo <postgres-secret> | base64 -d` to get the password to fill in
+1. Create a new dashboard
+    1. Check the json of that dasbhoard and check the new uid for the datasource
+    1. Replace all instances of the old `uid` value in [grafana-dashboard.json](/grafana-dashboard.json) with the new value.
+    1. Import [grafana-dashboard.json](/grafana-dashboard.json) as a new dashboard.
+
+```json
+          "datasource": {
+            "type": "postgres",
+            "uid": "h5H0Ytc4z"
+```
+
+The Database model is explained on the
 
 ### Variables
 

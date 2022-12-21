@@ -1,38 +1,30 @@
 *** Settings ***
 Library  String
 
-Force Tags  UC04  Team2
+Force Tags  UC03  Team2
 
 #Suite Setup  Fail  msg=Oops something went wrong
+Resource    keywords.resource
 
 *** Test Cases ***
 01 Test number one
+    Add Delay
     Log    Test is supposed to Pass
 
 02 Test number two
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
     ${int}  Convert to Integer  ${value}
     Log to console  Value = ${int}
-        IF  ${int}>75
+        IF  ${int}>70
+        Add Delay
+        Add Delay
         Fail  msg=Oops nu gaat hij ineens fout met error ${int}
     END
 
 03 Test
-    ${value}    Generate Random String   length=2  chars=[NUMBERS]
-    ${int}  Convert to Integer  ${value}
-    Log to console  Value = ${int}
-        IF  ${int}>80
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
-    END
+    Add Delay
+    Log    Test is supposed to Pass
 
 04 Test
-    Log    Test is supposed to Pass
-
-05 Test
-    Log    Test is supposed to Pass
-
-06 Test
-    Log    Test is supposed to Pass
-
-07 Test
+    Add Delay
     Log    Test is supposed to Pass
