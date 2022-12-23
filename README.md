@@ -198,3 +198,13 @@ WHERE
 GROUP BY 1
 ORDER BY 1
 ```
+### Start to get data to identify flaky tests
+
+```sql
+SELECT trun.generated, test_id, execution_status
+FROM test_result trus
+JOIN test_series_mapping tsm ON trus.test_run_id = tsm.test_run_id
+JOIN test_run trun ON trus.test_run_id = trun.id
+WHERE tsm.series = 1 AND test_id < 10
+ORDER BY trus.test_id, tsm.build_id DESC
+```
