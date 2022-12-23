@@ -1,4 +1,4 @@
-# dashboard-demo-data-generation
+# testresults-dashboard-demo
 
 ## Goal
 
