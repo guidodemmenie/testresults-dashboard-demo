@@ -17,7 +17,7 @@ Resource    keywords.resource
         IF  ${int}>90
         Add Delay
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=TimeoutError: waiting for locator .myclass${int}
     END
 
 03 Test
@@ -42,7 +42,7 @@ Resource    keywords.resource
     Log to console  Value = ${int}
     IF  ${int}>80
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=TimeoutError: waiting for locator .myclass${int}
     END
 08 Test
     ${value}    Generate Random String   length=2  chars=[NUMBERS]
@@ -50,5 +50,5 @@ Resource    keywords.resource
     Log to console  Value = ${int}
         IF  ${int}>65
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=TimeoutError: waiting for locator .myclass${int}
     END

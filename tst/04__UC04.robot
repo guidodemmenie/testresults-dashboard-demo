@@ -17,7 +17,7 @@ Resource    keywords.resource
     Log to console  Value = ${int}
         IF  ${int}>75
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=Something went really wrong
     END
 
 03 Test
@@ -27,7 +27,7 @@ Resource    keywords.resource
     IF  ${int}>80
         Add Delay
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=Something went really wrong
     END
 
 04 Test

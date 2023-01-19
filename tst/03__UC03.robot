@@ -18,7 +18,7 @@ Resource    keywords.resource
         IF  ${int}>70
         Add Delay
         Add Delay
-        Fail  msg=Oops nu gaat hij ineens fout met error ${int}
+        Fail  msg=TimeoutError: waiting for locator .myclass${int}
     END
 
 03 Test
