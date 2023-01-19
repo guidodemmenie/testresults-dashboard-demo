@@ -1,7 +1,7 @@
 *** Settings ***
 Library  String
 
-Force Tags  UC04  Team2
+Default Tags  UC04  Team2
 
 Resource    keywords.resource
 

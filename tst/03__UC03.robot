@@ -1,7 +1,7 @@
 *** Settings ***
 Library  String
 
-Force Tags  UC03  Team2
+Default Tags  UC03  Team2
 
 #Suite Setup  Fail  msg=Oops something went wrong
 Resource    keywords.resource
