@@ -5,12 +5,13 @@
 Generate testresults and represent the results on a dashboard.
 
 * Passing testcases
-* Flaky testcases (ToDo)
+* Flaky testcases
 * TestSuite with testcases that aren't run once in a while
 * Execution time that increases over time
 
 ![Fail Pass | Duration trend](./images/failpass-durationtrend.png)
 ![Errors | PassFail trend](./images/errors-passfailtrend.png)
+![Flakyness](./images/flakyness.png)
 
 ## Setup
 
@@ -124,7 +125,12 @@ Steps to get it all up and running:
             "uid": "h5H0Ytc4z"
 ```
 
-The Database model is explained on the
+Make sure you run the following sql statement (either from a dbclient or in a query field in grafana) otherwise the
+flakyness table will be empty.
+
+```sql
+ CREATE EXTENSION tablefunc;
+```
 
 ### Variables
 
@@ -200,4 +206,19 @@ WHERE
   tres.status = 'PASS'
 GROUP BY 1
 ORDER BY 1
+```
+
+### Flakyness
+
+```sql
+SELECT *
+FROM crosstab('SELECT tc.full_name, trus.test_run_id, execution_status
+FROM test_result trus
+JOIN test_series_mapping tsm ON trus.test_run_id = tsm.test_run_id
+JOIN test_run trun ON trus.test_run_id = trun.id
+JOIN test_case tc ON trus.test_id = tc.id
+WHERE tsm.series = 1 AND trus.test_run_id > (SELECT MAX(test_run_id) FROM test_result)-10
+order by 1,2
+')
+  AS final_result(TestID text, a text, b text, c text, d text, e text, f text, g text, h text, i text, j text);
 ```

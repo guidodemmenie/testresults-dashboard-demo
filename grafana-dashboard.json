@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 1,
   "links": [
     {
       "asDropdown": false,
@@ -57,7 +57,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "DKfzXr5Vk"
+        "uid": "CEzsXHo4k"
       },
       "description": "",
       "fieldConfig": {
@@ -143,7 +143,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "table",
           "group": [],
@@ -175,7 +175,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "table",
           "group": [],
@@ -210,7 +210,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "DKfzXr5Vk"
+        "uid": "CEzsXHo4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -288,7 +288,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "time_series",
           "group": [],
@@ -318,7 +318,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "DKfzXr5Vk"
+        "uid": "CEzsXHo4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -375,12 +375,12 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "9.3.2",
       "targets": [
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "table",
           "group": [],
@@ -427,7 +427,7 @@
     {
       "datasource": {
         "type": "postgres",
-        "uid": "DKfzXr5Vk"
+        "uid": "CEzsXHo4k"
       },
       "fieldConfig": {
         "defaults": {
@@ -537,7 +537,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "time_series",
           "group": [],
@@ -567,7 +567,7 @@
         {
           "datasource": {
             "type": "postgres",
-            "uid": "DKfzXr5Vk"
+            "uid": "CEzsXHo4k"
           },
           "format": "time_series",
           "group": [],
@@ -598,6 +598,124 @@
       ],
       "title": "Trend Pass/Fail",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "postgres",
+        "uid": "CEzsXHo4k"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "color-background-solid",
+            "filterable": false,
+            "inspect": false,
+            "width": 30
+          },
+          "mappings": [
+            {
+              "options": {
+                "FAIL": {
+                  "color": "red",
+                  "index": 1
+                },
+                "PASS": {
+                  "color": "green",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": ""
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "testname"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 300
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 18,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": false,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "testid"
+          }
+        ]
+      },
+      "pluginVersion": "9.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "postgres",
+            "uid": "CEzsXHo4k"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT * \nFROM crosstab('SELECT tc.full_name, trus.test_run_id, execution_status\nFROM test_result trus \nJOIN test_series_mapping tsm ON trus.test_run_id = tsm.test_run_id\nJOIN test_run trun ON trus.test_run_id = trun.id\nJOIN test_case tc ON trus.test_id = tc.id\nWHERE tsm.series = 1 AND trus.test_run_id > (SELECT MAX(test_run_id) FROM test_result)-10\norder by 1,2\n')\n  AS final_result(TestName text, a text, b text, c text, d text, e text, f text, g text, h text, i text, j text);\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "Flakyness",
+      "type": "table"
     }
   ],
   "refresh": false,
@@ -609,12 +727,12 @@
       {
         "current": {
           "selected": false,
-          "text": "",
-          "value": ""
+          "text": "20280224",
+          "value": "20280224"
         },
         "datasource": {
           "type": "postgres",
-          "uid": "DKfzXr5Vk"
+          "uid": "CEzsXHo4k"
         },
         "definition": "select distinct build_id from test_series_mapping tsm ",
         "hide": 0,
@@ -640,6 +758,6 @@
   "timezone": "",
   "title": "TestDashboard",
   "uid": "ERaIoii4z",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
