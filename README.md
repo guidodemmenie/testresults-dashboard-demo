@@ -5,13 +5,16 @@
 Generate testresults and represent the results on a dashboard.
 
 * Passing testcases
-* Flakey testcases
+* Flaky testcases (ToDo)
 * TestSuite with testcases that aren't run once in a while
 * Execution time that increases over time
 
+![Fail Pass | Duration trend](./images/failpass-durationtrend.png)
+![Errors | PassFail trend](./images/errors-passfailtrend.png)
+
 ## Setup
 
-Instruction are for running this on a Mac using [Minikube](https://minikube.sigs.k8s.io/docs/)
+Instruction are for running this demo on a Mac using [Minikube](https://minikube.sigs.k8s.io/docs/)
 
 ## Requirements
 
