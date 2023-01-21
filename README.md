@@ -2,7 +2,7 @@
 
 ## Goal
 
-Generate testresults and represent the results on a dashboard.
+Create an infrastructure on a local kubernetes in which to generate testresults in order to be able to do a live demo how those results can be represented on a dashboard.
 
 * Passing testcases
 * Flaky testcases
@@ -17,7 +17,7 @@ Generate testresults and represent the results on a dashboard.
 
 Instruction are for running this demo on a Mac using [Minikube](https://minikube.sigs.k8s.io/docs/)
 
-## Requirements
+### Requirements
 
 * [Homebrew](https://brew.sh) (already installed)
 * [Podman](https://podman.io)
@@ -27,14 +27,14 @@ Instruction are for running this demo on a Mac using [Minikube](https://minikube
 * [PostgreSQL](https://www.postgresql.org)
 * [Grafana](https://grafana.com/)
 
-### Podman
+#### Podman
 
 ``` bash
 brew install podman
 podman machine init --cpus 2
 ```
 
-### Minikube
+#### Minikube
 
 ``` bash
 brew install minikube
@@ -52,17 +52,17 @@ minikube addons enable registry
 
 `--cni=auto` to enable networking to work
 
-### Containers
+#### Containers
 
 * PostgreSQL
-  * [postgres.yaml](/postgres.yaml)
+  * [postgres.yaml](/infrastructure/k8s/postgres.yaml)
   * For more info: [github](https://github.com/docker-library/docs/blob/master/postgres/README.md)
 * Grafana
-  * [grafana.yaml](/grafana.yaml)
+  * [grafana.yaml](/infrastructure/k8s/grafana.yaml)
   * For more info: [grafana with docker](https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/)
 * Robotframework and TestArchiver
-  * [robotframework.yaml](/robotframework.yaml)
-  * [Dockerfile](/Dockerfile)
+  * [robotframework.yaml](/infrastructure/k8s/robotframework.yaml)
+  * [Dockerfile](/infrastructure/robotframework-container/Dockerfile)
   * For more info:
     * [robotframework.org](https://robotframework.org)
     * [TestArchiver @ github](https://github.com/salabs/TestArchiver)
@@ -99,14 +99,14 @@ minikube service robotframework -n rf-dashboard-demo --url
 minikube service rf-dashboard -n rf-dashboard-demo
 ```
 
-Attach to the robotframework pod and run the script `generate-testresults.sh` and go to report. (services must be opened as described above, or dns lookups will fail)
+Attach to the robotframework pod and run the script `generate-testresults.sh` and wait for it to finish. (services must be opened as described above, or dns lookups will fail)
 
-To open the reports:
+To open the standard generated robotframework reports:
 `http://localhost:<portnr>/<buildnr>/report.html`
 To open first build:
 `http://localhost:<portnr>/20280209/report.html`
 
-## Grafana
+### Grafana
 
 The [grafana-dashboard.json](/grafana-dashboard.json) can be imported, the queries used are explaned here.
 
@@ -222,3 +222,8 @@ order by 1,2
 ')
   AS final_result(TestID text, a text, b text, c text, d text, e text, f text, g text, h text, i text, j text);
 ```
+
+## Acknowledgements
+The idea came up in a client-project where we had a need for a dashboard that is the basis for what is in this demo.
+
+@bennyvw
