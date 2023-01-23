@@ -224,6 +224,7 @@ order by 1,2
 ```
 
 ## Acknowledgements
-The idea came up in a client-project where we had a need for a dashboard that is the basis for what is in this demo.
+In the need to represent the results, an initial dashboard has been developed on which this is loosely based. 
 
-@bennyvw
+Thanks to
+[@bennyvw](https://github.com/bennyvw)
